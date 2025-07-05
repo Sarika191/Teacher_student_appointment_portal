@@ -1,0 +1,53 @@
+<!-- teacher_recover.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recover Teacher Account</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+</head>
+<body>
+  <!-- Logout button -->
+  <div class="logout-btn">
+    <button onclick="window.location.href='index.html';">
+      <span class="material-symbols-outlined">logout</span> Logout
+    </button>
+  </div>
+
+  <div class="admin-container">
+    <div class="dashboard-header">
+      <h1>Recover Teacher Account</h1>
+    </div>
+
+  <p style="color: #444; text-align: center; margin-bottom: 1.5rem; font-size: 0.95rem;">
+  If your teacher account was removed by the admin but you were previously registered,<br>
+  you can request account recovery here.<br>
+  <strong>Note:</strong> Your request will remain pending until approved by the admin.
+</p>
+
+<br>
+    <form id="recoverTeacherForm">
+      <input type="text" id="teacherName" placeholder="Full Name" required>
+      <input type="text" id="department" placeholder="Department" required>
+      <input type="text" id="subject" placeholder="Subject" required>
+      <input type="email" id="email" placeholder="Email (Already Registered)" required>
+
+      <br>
+      <center><button type="submit">Request Approval</button></center>
+    </form>
+  </div>
+
+  <div id="custom-alert" class="custom-alert hidden">
+    <div class="custom-alert-box">
+      <p id="custom-alert-msg"></p>
+      <button onclick="closeCustomAlert()">OK</button>
+    </div>
+  </div>
+
+  <script src="nointernet.js"></script>
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="teacher_recover.js"></script>
+</body>
+</html>

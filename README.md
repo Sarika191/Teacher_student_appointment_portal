@@ -78,4 +78,4 @@ __________________________________________________
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Sarika191/Teacher-student-appointment/
+   git clone https://github.com/Sarika191/Teacher_student_appointment_portal

@@ -48,17 +48,29 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
                 }
             }, 1000);
 
-        } else {
-            logAction("ROLE_NOT_FOUND", `User document not found for ${email}.`);
-            const proceed = confirm("Your account is removed by Admin.\nDo you want to request recovery?");
-            if (proceed) {
-                window.location.href = "teacher_recover.html";
-            }
-        }
+        }  else {
+    logAction("ROLE_NOT_FOUND", `User document not found for ${email || "unknown email"}.`);
 
-    } catch (error) {
+    const proceed = confirm("Your account has been removed by Admin.\nDo you want to request recovery?");
+
+    if (proceed) {
+        
+        const chosenRole = prompt("Enter your role to recover (student/teacher):")?.trim().toLowerCase();
+
+        if (chosenRole === 'teacher') {
+            window.location.href = "teacher_recover.html";
+        } else if (chosenRole === 'student') {
+            window.location.href = "student_recover.html";
+        } else {
+            alert("Invalid or missing role. Please contact admin.");
+        }
+    }
+}
+
+    }
+     catch (error) {
         logAction("LOGIN_FAILED", `Login failed for ${email}: ${error.message}`);
-        alert("Not Registered!! ");
+        alert("Not Registered or Wrong Password ");
     } finally {
         loginButton.disabled = false;
     }

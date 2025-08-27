@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Segoe UI', 'Poppins', sans-serif;
-  background: url('https://images.wallpaperscraft.com/image/single/night_water_lighthouse_74439_2560x1440.jpg') no-repeat center center fixed;
+  background: url('https://raw.githubusercontent.com/Sarika191/Teacher_student_appointment_portal/refs/heads/main/Game%20Developer%20Resume%20Website%20in%20Black%20and%20White%20Grey%20Simple%20and%20Minimal%20Style.webp') no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
   display: flex;
@@ -20,11 +20,11 @@ body {
 
 .login-container,
 .register-container {
-  background-color: #faf6fe;
+  background-color: #ffffff;
   padding: 30px;
   border-radius: 12px;
   width: 380px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 16px rgb(0, 0, 0);
   position: relative;
   z-index: 1;
   display: flex;
@@ -51,15 +51,15 @@ select {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  font-family: inherit;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   transition: 0.3s;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: #4c5ca8;
-  box-shadow: 0 0 10px rgba(76, 92, 168, 0.3);
+  border-color: #6d6341;
+  box-shadow: 0 0 10px rgba(231, 232, 237, 0.3);
   outline: none;
 }
 
@@ -92,7 +92,7 @@ select option {
 
 select option:checked {
   background-color: #e6ddfb !important;
-  color: #4c3b8b;
+  color: #c3b9a8;
 }
 
 select:invalid {
@@ -108,7 +108,7 @@ button {
   padding: 10px;
   margin: 20px auto 10px;
   font-size: 16px;
-  background-color: #2d3455;
+  background-color: #48413b;
   color: white;
   border: none;
   border-radius: 6px;
@@ -117,7 +117,8 @@ button {
 }
 
 button:hover {
-  background-color: #6675ab;
+  background-color: #907c66;
+  cursor: pointer;
 }
 
 textarea {
@@ -131,9 +132,11 @@ textarea {
 
 .forgot-password a,
 p a {
-  color: #353d61;
+  color: #5f5846;
   text-decoration: none;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 14px;
+  font-weight: 500;
 }
 
 .forgot-password a:hover,

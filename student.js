@@ -1,17 +1,41 @@
-import { db } from './firebase-config.js';
+import { auth, db } from './firebase-config.js';
 import {
-  collection,
-  getDocs,
-  doc,
-  getDoc,
-  deleteDoc,
-  addDoc,
-  serverTimestamp
+  collection, getDocs, doc, getDoc, deleteDoc, addDoc, serverTimestamp, query, where
 } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
+import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
 
-// Dummy values (replace with actual auth/session values)
-const studentEmail = "chen110@gmail.com";
-const studentName = "Archen Aydin";
+
+const welcomeHeading = document.getElementById("studentWelcome");
+
+function setWelcomeMessage(name) {
+  if (welcomeHeading) {
+    welcomeHeading.innerHTML = `Welcome, <span>${name}</span>`;
+  }
+}
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        const studentName = userData.name || "Student";
+        setWelcomeMessage(studentName);
+      } else {
+        setWelcomeMessage("Student");
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      setWelcomeMessage("Student");
+    }
+  } else {
+    window.location.href = "login.html";
+  }
+});
+
+let studentEmail = "";
+let studentName = "";
 
 const departmentSelect = document.getElementById("departmentSelect");
 const teacherSelect = document.getElementById("selectedTeacher");
@@ -19,6 +43,15 @@ const appointmentTimeInput = document.getElementById("appointmentTime");
 const purposeInput = document.getElementById("purpose");
 const form = document.getElementById("appointmentForm");
 const appointmentList = document.getElementById("appointmentList");
+
+// ✅ Set min datetime for calendar input
+function setMinAppointmentDateTime() {
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // adjust to local timezone
+  const localNow = now.toISOString().slice(0, 16); // "YYYY-MM-DDTHH:MM"
+  appointmentTimeInput.min = localNow;
+}
+window.addEventListener("DOMContentLoaded", setMinAppointmentDateTime);
 
 // ✨ Custom Alert
 function showCustomAlert(message) {
@@ -29,7 +62,43 @@ function showCustomAlert(message) {
 }
 window.closeCustomAlert = function () {
   document.getElementById("custom-alert").classList.add("hidden");
-}
+};
+
+// 🔒 Auth Check & Load
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    if (!userDoc.exists()) {
+      alert("User data not found.");
+      signOut(auth);
+      window.location.href = "login.html";
+      return;
+    }
+
+    const data = userDoc.data();
+    if (data.role !== "student") {
+      alert("Only students are allowed here.");
+      signOut(auth);
+      window.location.href = "login.html";
+      return;
+    }
+
+    if (data.status !== "done") {
+      alert("Your account is not approved yet.");
+      signOut(auth);
+      window.location.href = "login.html";
+      return;
+    }
+
+    studentEmail = data.email;
+    studentName = data.name;
+
+    loadDepartmentsAndTeachers();
+    loadAppointments();
+  } else {
+    window.location.href = "login.html";
+  }
+});
 
 // 🔥 Load Departments & Teachers
 async function loadDepartmentsAndTeachers() {
@@ -46,7 +115,6 @@ async function loadDepartmentsAndTeachers() {
     teachersByDept[data.department].push(data.name);
   });
 
-  // Populate departments
   departments.forEach(dep => {
     const option = document.createElement("option");
     option.value = dep;
@@ -54,7 +122,6 @@ async function loadDepartmentsAndTeachers() {
     departmentSelect.appendChild(option);
   });
 
-  // Enable teacher dropdown when department selected
   departmentSelect.addEventListener("change", () => {
     teacherSelect.innerHTML = `<option value="" disabled selected>Select Teacher</option>`;
     const selectedDep = departmentSelect.value;
@@ -121,12 +188,17 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-// ✨ Load Appointments
+// ✨ Load Appointments for logged-in student
 async function loadAppointments() {
   appointmentList.innerHTML = "";
 
   try {
-    const snapshot = await getDocs(collection(db, "appointments"));
+    const q = query(
+      collection(db, "appointments"),
+      where("studentEmail", "==", studentEmail)
+    );
+
+    const snapshot = await getDocs(q);
     if (snapshot.empty) {
       appointmentList.innerHTML = `<tr><td colspan="5">No appointments found.</td></tr>`;
       return;
@@ -213,7 +285,3 @@ async function loadAppointments() {
     appointmentList.innerHTML = `<tr><td colspan="5">Error loading appointments.</td></tr>`;
   }
 }
-
-// Init on load
-loadDepartmentsAndTeachers();
-loadAppointments();

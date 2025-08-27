@@ -22,7 +22,7 @@ html {
 
 body {
   min-height: 100vh;
-  background: url("https://images.wallpaperscraft.com/image/single/headphones_books_education_121501_2560x1440.jpg");
+  background: url("https://raw.githubusercontent.com/Sarika191/Teacher_student_appointment_portal/refs/heads/main/headphones_books_education_121501_2560x1440.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -54,7 +54,7 @@ body {
 }
 
 .dashboard-header {
-  width: 60%;
+  width: auto;
   text-align: center;
   margin-bottom: 2.5rem;
   padding-bottom: 0.5rem;
@@ -185,6 +185,21 @@ button.updateBtn:hover {
   color: white;
 }
 
+button.approveBtn {
+  background: transparent;
+  color: #5f1880;
+  border: 1px solid #633b9b;
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+button.approveBtn:hover {
+  background-color: #7725a091;
+  color: rgb(255, 255, 255);
+}
 /* --- LOGOUT BUTTON --- */
 .logout-btn {
   position: absolute;

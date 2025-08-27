@@ -12,7 +12,7 @@ function createOfflineScreen() {
     width: 100vw;
     position: fixed;
     top: 0; left: 0;
-    background: rgb(255, 255, 255);
+    background: #FCFEFC;
     text-align: center;
     z-index: 99999;
     padding: 2rem;
@@ -30,10 +30,12 @@ function createOfflineScreen() {
   const h2 = document.createElement("h2");
   h2.textContent = "Oh no~ You're offline!";
   h2.style.cssText = `
-    color:rgb(193, 43, 93);
+    color: rgb(193, 43, 93);
     font-family: 'Comic Neue', cursive;
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
+    display: inline-block;
+    animation: wiggle 2s infinite ease-in-out;
   `;
 
   const p = document.createElement("p");
@@ -48,15 +50,21 @@ function createOfflineScreen() {
   offlineDiv.appendChild(p);
   document.body.appendChild(offlineDiv);
 
-  const style = document.createElement("style");
-  style.textContent = `
+  
+  const animations = document.createElement("style");
+  animations.textContent = `
     @keyframes float {
       0% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
       100% { transform: translateY(0); }
     }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-1deg); }
+      50% { transform: rotate(1deg); }
+    }
   `;
-  document.head.appendChild(style);
+  document.head.appendChild(animations);
 }
 
 function updateConnectionStatus() {
@@ -74,7 +82,6 @@ function updateConnectionStatus() {
   }
 }
 
-// Listeners
 window.addEventListener("load", updateConnectionStatus);
 window.addEventListener("online", updateConnectionStatus);
 window.addEventListener("offline", updateConnectionStatus);

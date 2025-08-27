@@ -1,6 +1,6 @@
 import { auth, db } from './firebase-config.js';
 import { createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
-import { doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
+import { doc, setDoc, Timestamp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
 import { logAction } from './log.js';
 
 document.getElementById('registerForm').addEventListener('submit', async function (e) {
@@ -31,7 +31,8 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     const userData = {
       name,
       email,
-      role
+      role,
+      createdAt: Timestamp.now()
     };
 
     if (role === 'teacher') {
@@ -44,17 +45,26 @@ document.getElementById('registerForm').addEventListener('submit', async functio
       userData.status = 'pending';
     }
 
+    // Save to /users
     await setDoc(doc(db, 'users', user.uid), userData);
 
+    // Save to /teachers if teacher
     if (role === 'teacher') {
-      await setDoc(doc(db, 'teachers', user.uid), {
-        name,
-        department,
-        subject,
-        email,
-        uid: user.uid,
-        status: 'approved'
-      });
+      try {
+        await setDoc(doc(db, 'teachers', user.uid), {
+          name,
+          department,
+          subject,
+          email,
+          uid: user.uid,
+          createdAt: Timestamp.now(),
+          status: 'approved'
+        });
+      } catch (e) {
+        alert("Teacher registered in users, but failed in /teachers: " + e.message);
+        logAction("TEACHER_DOC_FAILED", `Teacher doc error for ${email}: ${e.message}`);
+        return;
+      }
     }
 
     alert(`Registration successful! Redirecting as ${role}...`);
@@ -78,3 +88,4 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     alert(errorMessage);
   }
 });
+

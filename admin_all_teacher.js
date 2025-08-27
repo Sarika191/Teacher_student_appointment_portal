@@ -1,7 +1,7 @@
-import { db, auth } from './firebase-config.js';
+import { db, auth, secondaryAuth } from './firebase-config.js';
 import {
-  collection, addDoc, getDocs, deleteDoc,
-  doc, updateDoc, getDoc, setDoc, query, where
+  collection, getDocs, deleteDoc,
+  doc, updateDoc, setDoc, query, where, Timestamp
 } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
 
 import {
@@ -26,6 +26,13 @@ window.closeCustomAlert = closeCustomAlert;
 const teacherForm = document.getElementById('addTeacherForm');
 const teacherList = document.getElementById('teacherList');
 
+// Store admin email on load (for re-sign in later if needed)
+window.addEventListener('load', () => {
+  if (auth.currentUser) {
+    sessionStorage.setItem("adminEmail", auth.currentUser.email);
+  }
+});
+
 teacherForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -41,27 +48,27 @@ teacherForm.addEventListener('submit', async (e) => {
   }
 
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    // ✅ Use secondaryAuth here so admin stays logged in
+    const userCredential = await createUserWithEmailAndPassword(secondaryAuth, email, password);
     const user = userCredential.user;
 
-    await setDoc(doc(db, 'users', user.uid), {
+    const teacherData = {
       name,
       email,
       role: "teacher",
       department,
       subject,
-      status: "approved"
-    });
+      status: "approved",
+      createdAt: Timestamp.now()
+    };
 
+    await setDoc(doc(db, 'users', user.uid), teacherData);
     await setDoc(doc(db, 'teachers', user.uid), {
-      name,
-      department,
-      subject,
-      email,
+      ...teacherData,
       uid: user.uid
     });
 
-    showCustomAlert("Teacher added and account created.");
+    showCustomAlert("Teacher added successfully!");
     teacherForm.reset();
     loadTeachers();
 
@@ -74,8 +81,11 @@ teacherForm.addEventListener('submit', async (e) => {
 async function loadTeachers() {
   teacherList.innerHTML = "";
 
-  const usersRef = collection(db, 'users');
-  const q = query(usersRef, where("role", "==", "teacher"), where("status", "==", "approved"));
+  const q = query(
+    collection(db, 'users'),
+    where("role", "==", "teacher"),
+    where("status", "==", "approved")
+  );
   const snapshot = await getDocs(q);
 
   if (snapshot.empty) {
@@ -93,7 +103,7 @@ async function loadTeachers() {
       <td>
         <div class="action-buttons">
           <button class="deleteBtn" data-uid="${docSnap.id}">Delete</button>
-          <button class="updateBtn" data-uid="${docSnap.id}">Update</button>
+          <button class="approveBtn" data-uid="${docSnap.id}">Update</button>
         </div>
       </td>
     `;
@@ -121,14 +131,16 @@ function addTeacherEventListeners() {
     });
   });
 
-  document.querySelectorAll('.updateBtn').forEach(button => {
+  document.querySelectorAll('.approveBtn').forEach(button => {
     button.addEventListener('click', async () => {
       const uid = button.dataset.uid;
       const field = prompt("Which field you want to update? (name/department/subject)").toLowerCase();
+
       if (!['name', 'department', 'subject'].includes(field)) {
         showCustomAlert("Invalid field.");
         return;
       }
+
       const newValue = prompt(`Enter new ${field}:`);
       if (!newValue) {
         showCustomAlert("Value cannot be empty.");
@@ -139,19 +151,7 @@ function addTeacherEventListeners() {
         await updateDoc(doc(db, 'users', uid), { [field]: newValue });
         await updateDoc(doc(db, 'teachers', uid), { [field]: newValue });
 
-        const q = query(collection(db, 'appointments'), where('teacherUid', '==', uid));
-        const snap = await getDocs(q);
-
-        const updateTasks = [];
-        snap.forEach(docSnap => {
-          updateTasks.push(updateDoc(doc(db, 'appointments', docSnap.id), {
-            [field === 'name' ? 'teacher' : 'department']: newValue
-          }));
-        });
-
-        await Promise.all(updateTasks);
-
-        showCustomAlert("Updated successfully and reflected in appointments.");
+        showCustomAlert("Updated successfully.");
         loadTeachers();
       } catch (err) {
         console.error("Update error:", err);

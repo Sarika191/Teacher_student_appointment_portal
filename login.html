@@ -6,18 +6,41 @@
   <title>Login - Student-Teacher Appointment</title>
   <link rel="stylesheet" href="login.css"> 
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Hand+Pre:wght@400..700&display=swap" rel="stylesheet">
   <style>
     .home-icon {
       position: absolute;
       top: 1.5rem;
       right: 1.5rem;
       font-size: 29px;
-      color: #a7adb9;
+      color: #ded6ce;
       transition: background 0.3s ease, transform 0.2s ease;
       text-decoration: none;
     }
     .home-icon:hover {
       transform: scale(1.1);
+    }
+
+    /* Password eye styling */
+    .input-group {
+      position: relative;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding-right: 40px; /* space for eye icon */
+      box-sizing: border-box;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #a7adb9;
+      font-size: 22px;
+      user-select: none;
     }
   </style>
 </head>
@@ -27,25 +50,44 @@
   
   <div class="login-container">
     <div class="login-form">
-      <h2>Login</h2>
+      <h2 style=" font-family: Edu VIC WA NT Hand Pre, cursive;color:rgb(85, 58, 20);">Login</h2>
       <form id="loginForm">
         <div class="input-group">
-    <input type="email" id="email" placeholder="Enter your email" required autocomplete="off" />
-
+          <input type="email" id="email" placeholder="Enter your email" required autocomplete="off" />
         </div>
+
         <div class="input-group">
           <input type="password" id="password" placeholder="Enter your password" required>
+          <span class="material-symbols-outlined toggle-password" onclick="togglePassword()">visibility</span>
         </div>
+
         <div class="forgot-password">
           <a href="forgot-password.html">Forgot Password?</a>
         </div>
+        
         <button type="submit" class="btn">Login</button>
         <p>Don't have an account? <a href="register.html">Register here</a></p>
       </form>
     </div>
   </div>
- <script src="nointernet.js"></script>
+
+  <script src="nointernet.js"></script>
   <script type="module" src="./firebase-config.js"></script>
   <script type="module" src="login.js"></script> 
+
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById("password");
+      const toggleIcon = document.querySelector(".toggle-password");
+
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleIcon.textContent = "visibility_off";
+      } else {
+        passwordInput.type = "password";
+        toggleIcon.textContent = "visibility";
+      }
+    }
+  </script>
 </body>
 </html>

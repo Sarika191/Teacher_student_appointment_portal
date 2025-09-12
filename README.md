@@ -71,6 +71,7 @@ This project uses **public Firebase configuration** as required for frontend app
 │ └── log.js
 
 ---
+ive👉 https://teacher-student-portal.netlify.app/
 
 ## 🚀 How to Run Locally
 

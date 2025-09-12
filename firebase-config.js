@@ -4,13 +4,14 @@ import { getAuth } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth
 import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDVCk3T9UENOynCBO4aBkzXBDypvZ3xgTI",
+   apiKey: "AIzaSyDVCk3T9UENOynCBO4aBkzXBDypvZ3xgTI",
   authDomain: "student-teacher-appointm-1f44f.firebaseapp.com",
+  databaseURL: "https://student-teacher-appointm-1f44f-default-rtdb.firebaseio.com",
   projectId: "student-teacher-appointm-1f44f",
-  storageBucket: "student-teacher-appointm-1f44f.appspot.com",
+  storageBucket: "student-teacher-appointm-1f44f.firebasestorage.app",
   messagingSenderId: "1038059644172",
   appId: "1:1038059644172:web:24a5a0858ea1879ee11529",
-  databaseURL: "https://student-teacher-appointm-1f44f.firebaseio.com"
+  measurementId: "G-4BEPDY05P5"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -22,4 +23,5 @@ const secondaryApp = initializeApp(firebaseConfig, "Secondary");
 const secondaryAuth = getAuth(secondaryApp);
 
 export { app, auth, db, secondaryAuth };
+
 

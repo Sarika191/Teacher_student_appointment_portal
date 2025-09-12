@@ -1,4 +1,4 @@
-import { auth, db } from './firebase-config.js';
+import { secondaryAuth, db } from './firebase-config.js';
 import { createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
 import { doc, setDoc, Timestamp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
 import { logAction } from './log.js';
@@ -88,4 +88,5 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     alert(errorMessage);
   }
 });
+
 

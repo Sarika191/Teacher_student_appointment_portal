@@ -354,7 +354,7 @@ tr:hover {
 }
 
 /* --- MOBILE RESPONSIVE --- */
-@media (max-width: 768px) {
+@media (max-width: 300px) {
   html, body {
     height: 100%;
     margin: 0;
@@ -395,3 +395,4 @@ tr:hover {
     padding: 8px 10px;
   }
 }
+

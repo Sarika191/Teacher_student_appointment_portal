@@ -42,7 +42,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: all 0.3s ease;
 }
 
 .container > *, .admin-container > * {
@@ -60,13 +59,6 @@ body {
   background-repeat: no-repeat;
   background-position: bottom center;
   background-size: 300% 3px;
-  animation: headerFlow 6s linear infinite;
-}
-
-@keyframes headerFlow {
-  0% { background-position: 0% 100%; }
-  50% { background-position: 100% 100%; }
-  100% { background-position: 0% 100%; }
 }
 
 h1, h2, h3 {
@@ -84,22 +76,20 @@ input, select, textarea {
   font-size: 0.9rem;
   padding: 0.85rem 1rem;
   width: 100%;
-  transition: all 0.3s ease;
 }
 
 input:focus, select:focus, textarea:focus {
   border: 1px solid #517e51;
-  box-shadow:
-    0 0 4px rgba(22, 60, 22, 0.375),
-    0 0 10px rgba(120, 180, 100, 0.25),
-    1px 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 4px rgba(22, 60, 22, 0.375),
+              0 0 10px rgba(120, 180, 100, 0.25),
+              1px 1px 2px rgba(0, 0, 0, 0.05);
   outline: none;
 }
 
+/* BUTTONS */
 button, .btn {
   background: linear-gradient(270deg,#44204b6f, #ec3f7661, #e4dc8b90, #257e12a5);
   background-size: 600% 600%;
-  animation: flowGradient 5s ease infinite;
   color: #1d1c1c;
   border: 1px solid rgba(22, 48, 13, 0.227);
   padding: 0.6rem 2rem;
@@ -109,18 +99,6 @@ button, .btn {
   font-weight: 550;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   font-family: 'Segoe UI', sans-serif;
-  transition: transform 0.4s ease;
-}
-
-button:hover, .btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
-}
-
-@keyframes flowGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 /* DELETE & UPDATE BUTTONS */
@@ -131,7 +109,6 @@ button.deleteBtn, button.rejectBtn {
   padding: 5px 10px;
   border-radius: 20px;
   cursor: pointer;
-  transition: 0.3s;
   font-weight: 500;
 }
 
@@ -142,7 +119,6 @@ button.updateBtn {
   padding: 5px 10px;
   border-radius: 20px;
   cursor: pointer;
-  transition: 0.3s;
   font-weight: 500;
 }
 
@@ -153,7 +129,6 @@ button.approveBtn {
   padding: 5px 10px;
   border-radius: 20px;
   cursor: pointer;
-  transition: 0.3s;
   font-weight: 500;
 }
 
@@ -177,7 +152,6 @@ button.approveBtn {
   display: flex;
   align-items: center;
   gap: 5px;
-  transition: all 0.4s ease;
 }
 
 .material-symbols-outlined {
@@ -236,7 +210,7 @@ tr:hover {
   text-align: center;
 }
 
-/* MOBILE RESPONSIVE */
+/* MOBILE RESPONSIVE WITHOUT TRANSITIONS */
 @media (max-width: 768px) {
   body {
     padding: 1rem;
@@ -247,19 +221,16 @@ tr:hover {
     padding: 1rem;
     margin: 0.5rem 0;
     border-radius: 8px;
-    transition: none !important;
   }
 
   h1, h2, h3 {
     font-size: 1rem;
     text-align: center;
-    transition: none !important;
   }
 
   input, select, textarea, button, .btn {
     font-size: 0.85rem;
     padding: 0.6rem 0.8rem;
-    transition: none !important;
     animation: none !important;
   }
 
@@ -270,21 +241,17 @@ tr:hover {
   table, th, td {
     font-size: 0.8rem;
     min-width: unset;
-    transition: none !important;
   }
 
   .logout-btn {
     position: fixed;
     top: 0.6rem;
     right: 0.6rem;
-    transition: none !important;
   }
 
-  .dashboard-header {
-    animation: none !important;
-  }
-
+  .dashboard-header,
   .custom-alert-box {
     animation: none !important;
   }
 }
+

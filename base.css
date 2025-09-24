@@ -355,43 +355,50 @@ tr:hover {
 
 /* --- MOBILE RESPONSIVE --- */
 @media (max-width: 768px) {
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  body {
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background-position: center;
-    overflow-x: hidden;
+    align-items: stretch; /* fill width */
+    justify-content: flex-start; /* top-aligned */
+    padding: 1rem;
   }
 
-  .container,
-  .admin-container {
-    width: 95%;
-    padding: 0.7rem; 
+  .container, .admin-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+  }
+
+  h1, h2, h3 {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  input, select, textarea {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  button, .btn {
+    font-size: 0.85rem;
+    padding: 0.45rem 1rem;
+  }
+
+  .table-scroll-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  table, th, td {
+    font-size: 0.8rem;
+    min-width: unset;
   }
 
   .logout-btn {
     position: fixed;
-    top: 0.8rem;
-    right: 0.8rem;
-    margin: 0;
+    top: 0.6rem;
+    right: 0.6rem;
     z-index: 1000;
-  }
-
-  .logout-btn button {
-    width: auto;
-    justify-content: center;
-    font-size: 0.85rem;
-    padding: 0.35rem 0.7rem;
-  }
-
-  table {
-    font-size: 0.85rem;
-  }
-
-  th, td {
-    padding: 8px 10px;
   }
 }

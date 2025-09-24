@@ -16,28 +16,29 @@
 
 html {
   height: 100%;
-  scroll-behavior: smooth;
   background: #eaeaea;
+  scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
+  background: url("https://raw.githubusercontent.com/Sarika191/Teacher_student_appointment_portal/refs/heads/main/headphones_books_education_121501_2560x1440.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: var(--text);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   padding: 2rem;
-  background: url("https://raw.githubusercontent.com/Sarika191/Teacher_student_appointment_portal/refs/heads/main/headphones_books_education_121501_2560x1440.webp") no-repeat center center;
-  background-size: cover;
 }
 
 /* --- CONTAINER --- */
 .container, .admin-container {
   max-width: 800px;
   width: 100%;
-  margin: 1rem 0;
+  margin: auto;
   background: var(--card-bg);
   padding: 3rem 2.5rem;
   border-radius: var(--radius);
@@ -87,7 +88,7 @@ input, select, textarea {
   font-size: 0.9rem;
   transition: all 0.3s ease-in-out;
   padding: 0.85rem 1rem;
-  width:100%;
+  width: 100%;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -147,7 +148,8 @@ button:hover, .btn:hover {
 }
 
 /* --- DELETE & UPDATE BUTTONS --- */
-button.deleteBtn, button.rejectBtn {
+button.deleteBtn,
+button.rejectBtn {
   background: transparent;
   color: #9f3024;
   border: 1px solid #9c1e0f;
@@ -157,10 +159,13 @@ button.deleteBtn, button.rejectBtn {
   transition: 0.3s;
   font-weight: 500;
 }
-button.deleteBtn:hover, button.rejectBtn:hover {
+
+button.deleteBtn:hover,
+button.rejectBtn:hover {
   background-color: #c5584cb7;
   color: white;
 }
+
 button.updateBtn {
   background: transparent;
   color: #23612c;
@@ -171,10 +176,12 @@ button.updateBtn {
   transition: 0.3s;
   font-weight: 500;
 }
+
 button.updateBtn:hover {
   background-color: #97c76e;
   color: white;
 }
+
 button.approveBtn {
   background: transparent;
   color: #5f1880;
@@ -185,6 +192,7 @@ button.approveBtn {
   transition: 0.3s;
   font-weight: 500;
 }
+
 button.approveBtn:hover {
   background-color: #7725a091;
   color: rgb(255, 255, 255);
@@ -210,10 +218,10 @@ button.approveBtn:hover {
   font-weight: 540;
   cursor: pointer;
   box-shadow: 0 3px 10px rgba(17, 17, 17, 0.3);
+  transition: all 0.4s ease;
   display: flex;
   align-items: center;
   gap: 5px;
-  transition: all 0.4s ease;
 }
 
 .logout-btn button:hover {
@@ -234,9 +242,53 @@ button.approveBtn:hover {
   transition: transform 0.3s ease;
 }
 
+/* --- ACTION BUTTONS --- */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.action-buttons button {
+  flex: 0.7;
+  white-space: nowrap;
+}
+
 /* --- TABLE --- */
-.table-scroll-wrapper {
+table {
   width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  box-shadow: 0 0 10px rgba(92, 91, 91, 0.5);
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  max-width: 200px;
+  word-wrap: break-word;
+}
+
+th {
+  background: linear-gradient(to right, #354343, #536753);
+  color: #f3f3f3;
+  font-weight: 550;
+  font-size: 1rem;
+}
+
+td {
+  background-color: #e4e8e8;
+  color: #0f262c;
+  font-size: 0.96rem;
+}
+
+tr:hover {
+  background-color: rgba(18, 135, 14, 0.1);
+}
+
+/* --- TABLE SCROLL WRAPPER --- */
+.table-scroll-wrapper {
   max-height: 400px;
   overflow-x: auto;
   overflow-y: auto;
@@ -245,31 +297,8 @@ button.approveBtn:hover {
   box-shadow: 0 0 10px rgba(92, 91, 91, 0.5);
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1.5rem;
-}
-
-th, td {
-  padding: 12px 16px;
-  text-align: left;
-  border-bottom: 1px solid #ccc;
-}
-
-th {
-  background: linear-gradient(to right, #354343, #536753);
-  color: #f3f3f3;
-  font-weight: 550;
-}
-
-td {
-  background-color: #e4e8e8;
-  color: #0f262c;
-}
-
-tr:hover {
-  background-color: rgba(18, 135, 14, 0.1);
+.table-scroll-wrapper table {
+  min-width: 500px;
 }
 
 /* --- ALERT BOX --- */
@@ -283,15 +312,24 @@ tr:hover {
   justify-content: center;
   z-index: 9999;
 }
+
 .custom-alert-box {
   background: #ffffff;
   padding: 2rem 1.5rem;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   text-align: center;
-  max-width: 320px;
+  font-family: 'Segoe UI', sans-serif;
   animation: popIn 0.5s ease-in-out;
+  max-width: 320px;
 }
+
+.custom-alert-box p {
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 1rem;
+}
+
 .custom-alert-box button {
   padding: 0.5rem 1.3rem;
   background: linear-gradient(to right, #4c7070, #4c644c);
@@ -301,6 +339,15 @@ tr:hover {
   cursor: pointer;
   font-weight: bold;
 }
+
+.custom-alert-box button:hover {
+  background: linear-gradient(to right, #889363, #344534);
+}
+
+.hidden {
+  display: none;
+}
+
 @keyframes popIn {
   from { transform: scale(0.85); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
@@ -308,44 +355,43 @@ tr:hover {
 
 /* --- MOBILE RESPONSIVE --- */
 @media (max-width: 768px) {
-  body {
-    padding: 1rem;
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-position: center;
+    overflow-x: hidden;
   }
 
-  .container, .admin-container {
-    width: 100%;
-    padding: 1rem;
-    margin: 0.5rem 0;
-    border-radius: 8px;
-  }
-
-  h1, h2, h3 {
-    font-size: 1rem;
-    text-align: center;
-  }
-
-  input, select, textarea {
-    font-size: 0.85rem;
-    padding: 0.6rem 0.8rem;
-  }
-
-  button, .btn {
-    font-size: 0.85rem;
-    padding: 0.45rem 1rem;
-  }
-
-  .table-scroll-wrapper {
-    overflow-x: auto;
-  }
-
-  table, th, td {
-    font-size: 0.8rem;
-    min-width: unset;
+  .container,
+  .admin-container {
+    width: 95%;
+    padding: 0.7rem; 
   }
 
   .logout-btn {
     position: fixed;
-    top: 0.6rem;
-    right: 0.6rem;
+    top: 0.8rem;
+    right: 0.8rem;
+    margin: 0;
+    z-index: 1000;
+  }
+
+  .logout-btn button {
+    width: auto;
+    justify-content: center;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.7rem;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+
+  th, td {
+    padding: 8px 10px;
   }
 }

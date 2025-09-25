@@ -349,16 +349,13 @@ tr:hover {
 }
 
 @media (max-width: 600px) {
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 1rem;
-    overflow-x: hidden;
-  }
+ 
 
   .container,
   .admin-container {
     width: 95%;
+     display: cover;
+  justify-content: center;
     padding: 1rem; 
   }
 
@@ -370,4 +367,5 @@ tr:hover {
     padding: 8px 10px;
   }
 }
+
 

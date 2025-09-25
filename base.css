@@ -15,8 +15,8 @@
 }
 
 html {
-  height: 100%;
-  background: #eaeaea;
+  height:fit-content;
+  background: #fefefe;
   scroll-behavior: smooth;
 }
 
@@ -36,16 +36,17 @@ body {
 
 /* --- CONTAINER --- */
 .container, .admin-container {
-  max-width: 800px;
+  max-width:max-content;
   width: 100%;
   margin: auto;
   background: var(--card-bg);
   padding: 3rem 2.5rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  display: flex;
+  display:inline-flex;
   flex-direction: column;
   align-items: center;
+  /* transition: all 0.3s ease-in-out; */
 }
 
 .container > *, .admin-container > * {
@@ -85,19 +86,37 @@ input, select, textarea {
   border-radius: var(--radius);
   margin-bottom: 1.3rem;
   font-size: 0.9rem;
+  /* transition: all 0.3s ease-in-out; */
   padding: 0.85rem 1rem;
   width: 100%;
 }
 
 input:focus, select:focus, textarea:focus {
+  animation: shimmerPulse 0.4s ease-in-out infinite alternate;
   border: 1px solid #517e51;
   box-shadow:
     0 0 4px rgba(22, 60, 22, 0.375),
     0 0 10px rgba(120, 180, 100, 0.25),
     1px 1px 2px rgba(0, 0, 0, 0.05);
+  transform: translateZ(4px);
   outline: none;
-  animation: none !important;
-  transform: none !important;
+}
+
+@keyframes shimmerPulse {
+  0% {
+    box-shadow:
+      0 0 4px rgba(50, 150, 50, 0.2),
+      0 0 10px rgba(120, 180, 100, 0.25),
+      1px 1px 2px rgba(0, 0, 0, 0.05);
+    transform: translateZ(2px);
+  }
+  100% {
+    box-shadow:
+      0 0 8px rgba(50, 150, 50, 0.35),
+      0 0 18px rgba(120, 180, 100, 0.35),
+      1px 1px 4px rgba(0, 0, 0, 0.1);
+    transform: translateZ(4px);
+  }
 }
 
 /* --- BUTTONS --- */
@@ -114,11 +133,12 @@ button, .btn {
   font-weight: 550;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   font-family: 'Segoe UI', sans-serif;
+  transition: transform 0.4s ease;
 }
 
 button:hover, .btn:hover {
-  transform: none !important;
-  box-shadow: none !important;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes flowGradient {
@@ -129,18 +149,53 @@ button:hover, .btn:hover {
 
 /* --- DELETE & UPDATE BUTTONS --- */
 button.deleteBtn,
-button.rejectBtn,
-button.updateBtn,
-button.approveBtn {
-  transition: none !important;
+button.rejectBtn {
+  background: transparent;
+  color: #9f3024;
+  border: 1px solid #9c1e0f;
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
 }
 
 button.deleteBtn:hover,
-button.rejectBtn:hover,
-button.updateBtn:hover,
+button.rejectBtn:hover {
+  background-color: #c5584cb7;
+  color: white;
+}
+
+button.updateBtn {
+  background: transparent;
+  color: #23612c;
+  border: 1px solid #23612c;
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+button.updateBtn:hover {
+  background-color: #97c76e;
+  color: white;
+}
+
+button.approveBtn {
+  background: transparent;
+  color: #5f1880;
+  border: 1px solid #633b9b;
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
 button.approveBtn:hover {
-  background-color: unset !important;
-  color: unset !important;
+  background-color: #7725a091;
+  color: rgb(255, 255, 255);
 }
 
 /* --- LOGOUT BUTTON --- */
@@ -152,7 +207,7 @@ button.approveBtn:hover {
 }
 
 .logout-btn button {
-  font-family: "Macondo", cursive;
+  /* font-family: "Macondo", cursive; */
   font-size: 0.95rem;
   letter-spacing: 0.3px;
   background: linear-gradient(to right, #1e5933ad, #5367539f);
@@ -162,26 +217,44 @@ button.approveBtn:hover {
   border-radius: 50px;
   font-weight: 540;
   cursor: pointer;
+  box-shadow: 0 3px 10px rgba(17, 17, 17, 0.3);
+  transition: all 0.4s ease;
   display: flex;
   align-items: center;
   gap: 5px;
-  transition: none !important;
+}
+
+.logout-btn button:hover {
+  background:linear-gradient(to right, #a8be7c98, #5e985e8e);
+  border-color: #1a624f;
+  box-shadow: 0 0 14px 5px #d0ca5a52;
+  transform: scale(1.05);
+}
+
+.logout-btn button:hover .material-symbols-outlined {
+  transform: translateX(9px) rotate(-369deg);
 }
 
 .material-symbols-outlined {
   font-size: 20px;
   vertical-align: middle;
   margin-right: 6px;
-  transition: none !important;
+  transition: transform 0.3s ease;
+}
+
+/* --- ACTION BUTTONS --- */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.action-buttons button {
+  flex: 0.7;
+  white-space: nowrap;
 }
 
 /* --- TABLE --- */
-.table-scroll-wrapper {
-  max-height: 400px;
-  overflow-x: auto;
-  overflow-y: auto;
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -214,6 +287,20 @@ tr:hover {
   background-color: rgba(18, 135, 14, 0.1);
 }
 
+/* --- TABLE SCROLL WRAPPER --- */
+.table-scroll-wrapper {
+  max-height: 400px;
+  overflow-x: auto;
+  overflow-y: auto;
+  margin-top: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 0 10px rgba(92, 91, 91, 0.5);
+}
+
+.table-scroll-wrapper table {
+  min-width: 500px;
+}
+
 /* --- ALERT BOX --- */
 .custom-alert {
   position: fixed;
@@ -233,52 +320,77 @@ tr:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   text-align: center;
   font-family: 'Segoe UI', sans-serif;
-  animation: none !important;
+  animation: popIn 0.5s ease-in-out;
   max-width: 320px;
+}
+
+.custom-alert-box p {
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 1rem;
+}
+
+.custom-alert-box button {
+  padding: 0.5rem 1.3rem;
+  background: linear-gradient(to right, #4c7070, #4c644c);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.custom-alert-box button:hover {
+  background: linear-gradient(to right, #889363, #344534);
 }
 
 .hidden {
   display: none;
 }
 
-/* --- MOBILE RESPONSIVE --- */
-@media (max-width: 768px) {
-  body {
-    padding: 1rem;
+@keyframes popIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 400px) {
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    align-items:stretch;
+    justify-content: flex-start;
+    background-position: center;
+    overflow-x: hidden;
   }
 
-  .container, .admin-container {
-    width: 100%;
-    padding: 1rem;
-    margin: 0.5rem 0;
-    border-radius: 8px;
-  }
-
-  h1, h2, h3 {
-    font-size: 1rem;
-    text-align: center;
-  }
-
-  input, select, textarea, button, .btn {
-    font-size: 0.85rem;
-    padding: 0.6rem 0.8rem;
-    animation: none !important;
-    transform: none !important;
-    box-shadow: none !important;
-  }
-
-  .table-scroll-wrapper {
-    overflow-x: auto;
-  }
-
-  table, th, td {
-    font-size: 0.8rem;
-    min-width: unset;
+  .container,
+  .admin-container {
+    width: 95%;
+    padding: 0.7rem; 
   }
 
   .logout-btn {
     position: fixed;
-    top: 0.6rem;
-    right: 0.6rem;
+    top: 0.8rem;
+    right: 0.8rem;
+    margin: 0;
+    z-index: 1000;
+  }
+
+  .logout-btn button {
+    width: auto;
+    justify-content: center;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.7rem;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+
+  th, td {
+    padding: 8px 10px;
   }
 }

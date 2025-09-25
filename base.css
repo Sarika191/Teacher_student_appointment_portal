@@ -14,57 +14,36 @@
   box-sizing: border-box;
 }
 
-html {
-  height: 100%;
-  background: #eaeaea;
-  scroll-behavior: smooth;
-}
 
 body {
-  min-height: 100vh;
   background: url("https://raw.githubusercontent.com/Sarika191/Teacher_student_appointment_portal/refs/heads/main/headphones_books_education_121501_2560x1440.webp");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   color: var(--text);
+  background: #f0f0f0;
   display: flex;
-  align-items: center;
   justify-content: center;
   padding: 2rem;
 }
 
 /* --- CONTAINER --- */
 .container, .admin-container {
-  max-width: 800px;
-  width: 100%;
-  margin: auto;
+   width: 100%;
+  max-width: 700px;
   background: var(--card-bg);
-  padding: 3rem 2.5rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all 0.3s ease-in-out;
+  padding: 2rem;
 }
 
-.container > *, .admin-container > * {
+/* .container > *, .admin-container > * {
   width: 100%;
   max-width: 600px;
-}
+} */
 
 .dashboard-header {
-  width: auto;
-  text-align: center;
-  margin-bottom: 2.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 3px solid transparent;
-  background-image: linear-gradient(90deg, #d6e84e, #c5427d, #389edd, #d6e84e);
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  background-size: 300% 3px;
-  animation: headerFlow 6s linear infinite;
+  font-size: 24px;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
 }
 
 @keyframes headerFlow {
@@ -81,14 +60,11 @@ h1, h2, h3 {
 
 input, select, textarea {
   background: linear-gradient(135deg, #ccd38b3b, #1b672d72);
-  background-size: 400%;
-  border: 1px solid #ccc;
+ width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.6rem;
   border-radius: var(--radius);
-  margin-bottom: 1.3rem;
-  font-size: 0.9rem;
-  transition: all 0.3s ease-in-out;
-  padding: 0.85rem 1rem;
-  width: 100%;
+  border: 1px solid #ccc;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -348,49 +324,21 @@ tr:hover {
   display: none;
 }
 
-@keyframes popIn {
-  from { transform: scale(0.85); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
+/* --- RESPONSIVE --- */
 @media (max-width: 600px) {
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background-position: center;
-    overflow-x: hidden;
+  body {
+    padding: 1rem;
   }
 
-  .container,
-  .admin-container {
-    width: 95%;
-    padding: 0.7rem; 
+  .container {
+    padding: 1rem;
   }
 
-  .logout-btn {
-    position: fixed;
-    top: 0.8rem;
-    right: 0.8rem;
-    margin: 0;
-    z-index: 1000;
+  .dashboard-header h1 {
+    font-size: 20px;
   }
 
-  .logout-btn button {
-    width: auto;
-    justify-content: center;
-    font-size: 0.85rem;
-    padding: 0.35rem 0.7rem;
-  }
-
-  table {
-    font-size: 0.85rem;
-  }
-
-  th, td {
-    padding: 8px 10px;
+  .dashboard-header h2 {
+    font-size: 14px;
   }
 }

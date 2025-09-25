@@ -15,8 +15,8 @@
 }
 
 html {
-  height:fit-content;
-  background: #fefefe;
+  height: 100%;
+  background: #eaeaea;
   scroll-behavior: smooth;
 }
 
@@ -36,17 +36,17 @@ body {
 
 /* --- CONTAINER --- */
 .container, .admin-container {
-  max-width:max-content;
+  max-width: 800px;
   width: 100%;
   margin: auto;
   background: var(--card-bg);
   padding: 3rem 2.5rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  display:inline-flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  /* transition: all 0.3s ease-in-out; */
+  transition: all 0.3s ease-in-out;
 }
 
 .container > *, .admin-container > * {
@@ -86,7 +86,7 @@ input, select, textarea {
   border-radius: var(--radius);
   margin-bottom: 1.3rem;
   font-size: 0.9rem;
-  /* transition: all 0.3s ease-in-out; */
+  transition: all 0.3s ease-in-out;
   padding: 0.85rem 1rem;
   width: 100%;
 }
@@ -207,7 +207,7 @@ button.approveBtn:hover {
 }
 
 .logout-btn button {
-  /* font-family: "Macondo", cursive; */
+  font-family: "Macondo", cursive;
   font-size: 0.95rem;
   letter-spacing: 0.3px;
   background: linear-gradient(to right, #1e5933ad, #5367539f);
@@ -353,13 +353,13 @@ tr:hover {
   to { transform: scale(1); opacity: 1; }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 3000px) {
   html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     flex-direction: column;
-    align-items:stretch;
+    align-items: center;
     justify-content: flex-start;
     background-position: center;
     overflow-x: hidden;

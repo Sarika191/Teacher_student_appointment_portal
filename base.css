@@ -353,13 +353,9 @@ tr:hover {
   to { transform: scale(1); opacity: 1; }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 3000px) {
   body {
   min-height: 50vh;
-  background: url("https://raw.githubusercontent.com/Sarika191/Teacher_student_appointment_portal/refs/heads/main/headphones_books_education_121501_2560x1440.webp");
-  background-size:auto;
-  background-position: center;
-  background-repeat: no-repeat;
   color: var(--text);
   align-items: center;
   flex-direction: column;
@@ -378,7 +374,8 @@ tr:hover {
 
   .container,
   .admin-container {
-    width: 95%;
+    width: 105%;
+    height:100%
     padding: 0.7rem; 
   }
 
@@ -405,4 +402,5 @@ tr:hover {
     padding: 8px 10px;
   }
 }
+
 

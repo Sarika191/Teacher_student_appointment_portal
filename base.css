@@ -37,7 +37,7 @@ body {
 /* --- CONTAINER --- */
 .container, .admin-container {
   max-width: 800px;
-  width:auto;
+  width:100%;
   margin: auto;
   background: var(--card-bg);
   padding: 3rem 2.5rem;
@@ -353,7 +353,7 @@ tr:hover {
   to { transform: scale(1); opacity: 1; }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
   html, body {
     height: 100%;
     margin: 0;
@@ -367,7 +367,8 @@ tr:hover {
 
   .container,
   .admin-container {
-    width: 100%;
+    width: 95%;
+    max-width: 95%;
     padding: 0.7rem; 
   }
 
@@ -394,3 +395,4 @@ tr:hover {
     padding: 8px 10px;
   }
 }
+

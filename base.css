@@ -35,9 +35,9 @@ body {
 }
 
 /* --- CONTAINER --- */
-.container, .admin-container {
+.admin-container {
   max-width: 800px;
-  width:100%;
+  width:auto;
   margin: auto;
   background: var(--card-bg);
   padding: 3rem 2.5rem;
@@ -49,7 +49,7 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
-.container > *, .admin-container > * {
+ .admin-container > * {
   width: 100%;
   max-width: 600px;
 }
@@ -365,7 +365,6 @@ tr:hover {
     overflow-x: hidden;
   }
 
-  .container,
   .admin-container {
     width: 95%;
     max-width: 95%;
@@ -395,4 +394,5 @@ tr:hover {
     padding: 8px 10px;
   }
 }
+
 

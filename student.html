@@ -28,7 +28,7 @@
 </div>
 
 
-   <div class="dashboard-section">
+
   <h2>Book Appointment</h2>
   <form id="appointmentForm">
 
@@ -42,7 +42,8 @@
       <option value="" disabled selected>Select Teacher</option>
     </select>
 
-    <input type="datetime-local" id="appointmentTime" required>
+<input type="datetime-local" id="appointmentTime" required aria-label="Enter appointment time">
+    
     <textarea id="purpose" placeholder="Purpose or your message here" required></textarea>
     <center>
       <button type="submit">Book Appointment</button>
@@ -65,8 +66,7 @@
     </tbody>
   </table>
 </div>
-   </div>
-  </div>
+
   
   <div id="custom-alert" class="custom-alert hidden">
   <div class="custom-alert-box">
@@ -78,8 +78,6 @@
  <script src="nointernet.js"></script>
 <script type="module" src="firebase-config.js"></script>
 <script type="module" src="student.js"></script>
-  
+
 </body>
 </html>
-
-
